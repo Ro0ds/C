@@ -18,6 +18,9 @@ int main() {
     int tentativas = 1;
     double pontos = 1000;
 
+    /*
+    gerando número secreto randomico a partir do tempo (segundos)
+    após gerar o número, pegar o resto da divisão com 100 para diminui-lo */
     int segundos = time(0);
     srand(segundos);
     int numerogrande = rand();
