@@ -13,10 +13,12 @@ int main() {
     //compilar e gerar o .exe
     //gcc .\adivinhacao.c -o adivinhacao.exe
 
+    int nivel;
+    int totaldetentativas;
     int chute;
     int ganhou = 0;
-    int tentativas = 1;
     double pontos = 1000;
+    int acertou;
 
     /*
     gerando número secreto randomico a partir do tempo (segundos)
@@ -26,24 +28,41 @@ int main() {
     int numerogrande = rand();
     int numerosecreto = numerogrande % 100;
 
-    while(!ganhou) {
+    printf("Qual o nivel de dificuldade?\n");
+    printf("(1) Facil | (2) Medio | (3) Dificil\n\n");
+    printf("Escolha: ");
+    scanf("%d", &nivel);
+
+    switch(nivel){
+        case 1:
+            totaldetentativas = 20;
+            break;
+        case 2:
+            totaldetentativas = 15;
+            break;
+        default:
+            totaldetentativas = 6;
+            break;
+    }
+
+    for(int i = 1; i <= totaldetentativas; i++){
         printf("Qual e o seu chute? ");
         scanf("%d", &chute);
 
         if(chute < 0){
             printf("Voce nao pode chutar numeros negativos\n");
-            tentativas--;
+            i--;
             continue;
         }
 
-        printf("Tentativa %d, numero %d!", tentativas, chute);
+        printf("Tentativa %d, numero %d!", i, chute);
 
-        int acertou = chute == numerosecreto;
+        acertou = chute == numerosecreto;
         int maior = chute > numerosecreto;
 
         if(acertou) {
-            printf("\nParabens, voce acertou com %d tentativas!", tentativas);
-            ganhou = 1;
+            printf("\nParabens, voce acertou com %d tentativas!", i);
+            break;
         } 
         else if(maior) {
                 printf("\nSeu chute foi maior do que o numero secreto\n");
@@ -51,11 +70,16 @@ int main() {
             else {
                 printf("\nSeu chute foi menor do que o numero secreto\n");
             }
-        tentativas++;
-
         double pontosperdidos = abs(chute - numerosecreto) / (double)2;
         pontos = pontos - pontosperdidos;
     }
     printf("\nVoce fez %.2f pontos\n", pontos);
-    printf("Obrigado por jogar!");
+    
+    if(acertou){
+        printf("Obrigado por jogar!\n");
+    }
+    else{
+        printf("\nVoce perdeu, tente novamente\n");
+        printf("O numero secreto era %d", numerosecreto);
+    }
 }
