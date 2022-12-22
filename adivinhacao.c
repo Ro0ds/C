@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <locale.h>
 
 int main() {
@@ -12,11 +13,15 @@ int main() {
     //compilar e gerar o .exe
     //gcc .\adivinhacao.c -o adivinhacao.exe
 
-    int numerosecreto = 42;
     int chute;
     int ganhou = 0;
     int tentativas = 1;
     double pontos = 1000;
+
+    int segundos = time(0);
+    srand(segundos);
+    int numerogrande = rand();
+    int numerosecreto = numerogrande % 100;
 
     while(!ganhou) {
         printf("Qual e o seu chute? ");
