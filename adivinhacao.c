@@ -61,7 +61,7 @@ int main() {
         int maior = chute > numerosecreto;
 
         if(acertou) {
-            printf("\nParabens, voce acertou com %d tentativas!", i);
+            printf("\nNumero de tentativas %d\n", i);
             break;
         } 
         else if(maior) {
