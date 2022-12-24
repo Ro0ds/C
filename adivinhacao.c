@@ -26,16 +26,23 @@ int main() {
     int ganhou = 0;
     double pontos = 1000;
     int acertou;
+    int valormaximo;
 
     /*
     gerando número secreto randomico a partir do tempo (segundos)
-    após gerar o número, pegar o resto da divisão com 100 para diminui-lo */
+    após gerar o número, pegar o resto da divisão com 100 para diminui-lo 
+    Usuario ira definir qual o valor maximo dos numeros aleatorios
+    */
+
+    printf("Defina o valor maximo do numero que tera que adivinhar: ");
+    scanf("%d", &valormaximo);
+    
     int segundos = time(0);
     srand(segundos);
     int numerogrande = rand();
-    int numerosecreto = numerogrande % 100;
+    int numerosecreto = numerogrande % valormaximo;
 
-    printf("Qual o nivel de dificuldade?\n");
+    printf("\nQual o nivel de dificuldade?\n");
     printf("(1) Facil | (2) Medio | (3) Dificil\n\n");
     printf("Escolha: ");
     scanf("%d", &nivel);
