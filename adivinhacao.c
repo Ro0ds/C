@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <locale.h>
+#define NIVEL_FACIL 20
+#define NIVEL_MEDIO 15
+#define NIVEL_DIFICIL 6
 
 int main() {
     setlocale(LC_ALL, "Portuguese_Brasil");
@@ -23,8 +26,9 @@ int main() {
     int nivel;
     int totaldetentativas;
     int chute;
+    int chuteanterior;
     int ganhou = 0;
-    double pontos = 1000;
+    int pontos = 1000;
     int acertou;
     int valormaximo;
 
@@ -43,25 +47,33 @@ int main() {
     int numerosecreto = numerogrande % valormaximo;
 
     printf("\nQual o nivel de dificuldade?\n");
-    printf("(1) Facil | (2) Medio | (3) Dificil\n\n");
+    printf("(1) Facil | (2) Medio | (3) Dificil\n");
     printf("Escolha: ");
     scanf("%d", &nivel);
 
     switch(nivel){
         case 1:
-            totaldetentativas = 20;
+            totaldetentativas = NIVEL_FACIL;
             break;
         case 2:
-            totaldetentativas = 15;
+            totaldetentativas = NIVEL_MEDIO;
             break;
         default:
-            totaldetentativas = 6;
+            totaldetentativas = NIVEL_DIFICIL;
             break;
     }
 
     for(int i = 1; i <= totaldetentativas; i++){
-        printf("Qual e o seu chute? ");
+        printf("\nQual e o seu chute? ");
         scanf("%d", &chute);
+
+        if(chute == chuteanterior){
+            printf("Este numero ja foi jogado, tente novamente");
+            i--;
+            continue;
+        }
+
+        chuteanterior = chute;
 
         if(chute < 0){
             printf("Voce nao pode chutar numeros negativos\n");
@@ -69,7 +81,7 @@ int main() {
             continue;
         }
 
-        printf("Tentativa %d, numero %d!", i, chute);
+        printf("Tentativa %d", i);
 
         acertou = chute == numerosecreto;
         int maior = chute > numerosecreto;
